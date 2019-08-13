@@ -22,7 +22,7 @@ after_success:
   - docker push phoenix1point618/multi-worker
 
 #deploy:
-#  provider: elasticbeanstalk
+#  #provider: elasticbeanstalk
 #  region: us-west-1
 #  app: multi-docker
 #  env: MultiDocker-env
