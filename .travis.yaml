@@ -1,7 +1,6 @@
 sudo: required
 services:
   - docker
-
 env:
   global:
     - SHA=$(git rev-parse HEAD)
@@ -12,12 +11,12 @@ before_install:
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
   - gcloud components update kubectl
-  - gloud auth activate-service-account --key-file service-account.json
+  - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project multi-k8s-249801
   - gcloud config set compute/zone us-central1-a
-  - gcloud container clusters get-credentials multi cluster
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_USERNAME" --password-stdin
-  - docker build -t phoenix1point618/react-test -f ./client/Dockerfile.dev .client
+  - gcloud container clusters get-credentials multi-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t phoenix1point618/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   docker run -e CI=true phoenix1point618/react-test npm test
